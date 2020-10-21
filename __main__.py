@@ -1,26 +1,33 @@
-import pygame
-import time
+import pygame, os, time
+os.environ["SDL_VIDEODRIVER"] = "directx"
 pygame.init()
 
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 700
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 800
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+#screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+#SCREEN_WIDTH = screen.get_width()
+#SCREEN_HEIGHT = screen.get_height()
 
 variable = 0
 
-lifes = 5
+lifes = 1000
+level = 1
+hits_to_end = 10
 
 letters = pygame.font.match_font("arial", True, False)
 print(letters)
+
 f = pygame.font.Font(letters, 20)
 
 r = pygame.Rect(10, 10, 20, 20)
 
 c = pygame.Rect(600, 80, 40, 40)
-speedy = 3
-speedx = 3
 
+basespeed = 3
+speedy = basespeed
+speedx = basespeed
 
 running = True
 
@@ -74,21 +81,22 @@ while running:
     if c.right > SCREEN_WIDTH:
         c.right = SCREEN_WIDTH
         lifes -= 1
-        speedx = -3
+        speedx = -basespeed
 
     if c.left < 0:
         c.left = 0
         lifes -= 1
-        speedx = 3
+        speedx = basespeed
 
     if c.colliderect(r):
+        hits_to_end -= 1
         if speedx < 0:
             c.left = r.right
-            speedx = 3
+            speedx = basespeed
 
         elif speedx > 0:
             c.right = r.left
-            speedx = -3
+            speedx = -basespeed
 
 
 
@@ -98,40 +106,57 @@ while running:
     if c.bottom > SCREEN_HEIGHT:
         c.bottom = SCREEN_HEIGHT
         lifes -= 1
-        speedy = -3
+        speedy = -basespeed
+
 
     if c.top < 0:
         c.top = 0
         lifes -= 1
-        speedy = 3
+        speedy = basespeed
 
 
 
     if c.colliderect(r):
+        hits_to_end -= 1
         if speedy > 0:
             c.bottom = r.top
-            speedy = -3
+            speedy = -basespeed
+
 
         elif speedy < 0:
             c.top = r.bottom
-            speedy = 3
+            speedy = basespeed
+
 
 
     if lifes == -1:
         lifes = 0
         exit()
 
+    if hits_to_end == 0:
+        hits_to_end = 10
+        basespeed += 2
+        speedy = basespeed
+        speedx = basespeed
+        level += 1
+
+
+
+
+
 
     #rendering
     screen.fill([variable % 255, 255, variable % 180])
 
     lives = f.render("LIVES = " + str(lifes), False, [0, 0, 255])
-
-
+    lewel = f.render("LEVEL = " + str(level), False, [0, 0, 255])
+    hits = f.render("HITS TO END = " + str(hits_to_end), False, [0, 0, 255])
     pygame.draw.rect(screen, [189, 0, 0], r)
     #pygame.draw.rect(screen, [67, 0, 0], c)
     pygame.draw.circle(screen, [0, 0, 255], [c.centerx, c.centery], 20)
     screen.blit(lives, [800, 30])
+    screen.blit(lewel, (800, 10))
+    screen.blit(hits, [800, 50])
 
     pygame.display.flip()
 
