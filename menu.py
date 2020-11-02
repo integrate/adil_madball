@@ -1,7 +1,7 @@
 import pygame
 
 def menu(screen):
-    mode = "MENU"
+    bc = "MENU"
     screen.fill([0, 0, 0])
     t = pygame.event.get()
     for i in t:
@@ -9,6 +9,6 @@ def menu(screen):
             exit()
         if i.type == pygame.KEYDOWN:
             if i.key == pygame.K_RIGHT:
-                mode = "GAME"
+               bc = "GAME"
     pygame.display.flip()
-    return mode
+    return bc
