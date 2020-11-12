@@ -1,9 +1,10 @@
 import pygame, os, time, settings
 os.environ["SDL_VIDEODRIVER"] = "directx"
 pygame.init()
+screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
 import game, menu
 
-screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
+
 
 mode = "MENU"
 
@@ -14,5 +15,13 @@ while True:
         if m == "GAME":
             mode = "GAME"
 
+
     elif mode == "GAME":
         g = game.game(screen)
+        if g == "MENU":
+            mode = "MENU"
+            game.lifes = 0
+            game.hits_to_end = 10
+            game.level = 1
+            game.c = pygame.Rect(600, 80, 100, 100)
+

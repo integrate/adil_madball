@@ -2,7 +2,7 @@ import pygame, settings
 pygame.init()
 variable = 0
 
-lifes = 1000
+lifes = 0
 level = 1
 hits_to_end = 10
 
@@ -13,12 +13,15 @@ f = pygame.font.Font(letters, 20)
 
 r = pygame.Rect(10, 10, 20, 20)
 
-c = pygame.Rect(600, 80, 40, 40)
+c = pygame.Rect(600, 80, 100, 100)
 
 basespeed = 3
 speedy = basespeed
 speedx = basespeed
+k = pygame.image.load("supports/descarga.png").convert()
+k = pygame.transform.scale(k, (100, 100))
 
+k.set_colorkey([255, 255, 255])
 
 def game(screen):
     global lifes, level, hits_to_end, basespeed, speedy, speedx
@@ -139,10 +142,10 @@ def game(screen):
             speedy = basespeed
 
 
-
     if lifes == -1:
         lifes = 0
-        exit()
+        return "MENU"
+
 
     if hits_to_end == 0:
         hits_to_end = 10
@@ -166,11 +169,13 @@ def game(screen):
 
 
     pygame.draw.rect(screen, [189, 0, 0], r)
+
+
+    #pygame.draw.circle(screen, [0, 0, 255], [c.centerx, c.centery], 20)
     #pygame.draw.rect(screen, [67, 0, 0], c)
-    pygame.draw.circle(screen, [0, 0, 255], [c.centerx, c.centery], 20)
     screen.blit(lives, [900, 30])
     screen.blit(lewel, (900, 10))
     screen.blit(hits, [900, 50])
-
+    screen.blit(k, c)
     pygame.display.flip()
 
