@@ -6,6 +6,7 @@ import game, menu
 
 
 
+
 mode = "MENU"
 
 while True:
@@ -20,8 +21,4 @@ while True:
         g = game.game(screen)
         if g == "MENU":
             mode = "MENU"
-            game.lifes = 0
-            game.hits_to_end = 10
-            game.level = 1
-            game.c = pygame.Rect(600, 80, 100, 100)
-
+            game.restart()

@@ -179,3 +179,15 @@ def game(screen):
     screen.blit(k, c)
     pygame.display.flip()
 
+
+def restart():
+    global lifes, level, hits_to_end, basespeed, speedx, speedy
+    lifes = 0
+    level = 1
+    speedx = 3
+    speedy = 3
+    basespeed = 3
+    hits_to_end = 10
+    c.x = 600
+    c.y = 80
+    return "MENU"
