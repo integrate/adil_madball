@@ -6,7 +6,6 @@ import game, menu
 
 
 
-
 mode = "MENU"
 
 while True:
@@ -21,4 +20,5 @@ while True:
         g = game.game(screen)
         if g == "MENU":
             mode = "MENU"
+            game.save_records()
             game.restart()

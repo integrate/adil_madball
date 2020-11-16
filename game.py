@@ -2,9 +2,10 @@ import pygame, settings
 pygame.init()
 variable = 0
 
-lifes = 0
+lifes = 5
 level = 1
 hits_to_end = 10
+last_record = level
 
 letters = pygame.font.match_font("arial", True, False)
 print(letters)
@@ -22,6 +23,13 @@ k = pygame.image.load("supports/descarga.png").convert()
 k = pygame.transform.scale(k, (100, 100))
 
 k.set_colorkey([255, 255, 255])
+
+j = open("RECORDS.txt", "r")
+u = j.readline()
+lr = f.render("RECORD" + u, True, [0, 0, 255])
+j.close()
+
+
 
 def game(screen):
     global lifes, level, hits_to_end, basespeed, speedy, speedx
@@ -176,8 +184,20 @@ def game(screen):
     screen.blit(lives, [900, 30])
     screen.blit(lewel, (900, 10))
     screen.blit(hits, [900, 50])
+    screen.blit(lr, (900, 70))
+
     screen.blit(k, c)
     pygame.display.flip()
+
+
+
+
+
+
+
+
+
+
 
 
 def restart():
@@ -191,3 +211,9 @@ def restart():
     c.x = 600
     c.y = 80
     return "MENU"
+
+def save_records():
+
+    r = open("RECORDS.txt", "r+")
+    r.write("last_record " + str(level))
+    r.close()
