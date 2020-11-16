@@ -182,7 +182,7 @@ def game(screen):
 
 def restart():
     global lifes, level, hits_to_end, basespeed, speedx, speedy
-    lifes = 0
+    lifes = 5
     level = 1
     speedx = 3
     speedy = 3
