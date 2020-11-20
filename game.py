@@ -2,10 +2,11 @@ import pygame, settings
 pygame.init()
 variable = 0
 
-lifes = 5
+lifes = 0
 level = 1
-hits_to_end = 10
+hits_to_end = 1
 last_record = level
+
 
 letters = pygame.font.match_font("arial", True, False)
 print(letters)
@@ -202,18 +203,31 @@ def game(screen):
 
 def restart():
     global lifes, level, hits_to_end, basespeed, speedx, speedy
-    lifes = 5
+    lifes = 0
     level = 1
     speedx = 3
     speedy = 3
     basespeed = 3
-    hits_to_end = 10
+    hits_to_end = 1
     c.x = 600
     c.y = 80
     return "MENU"
 
 def save_records():
+    global first_record, second_record
 
     r = open("RECORDS.txt", "r+")
-    r.write("last_record " + str(level))
-    r.close()
+    l = r.readline()
+    po = l.isnumeric()
+    if po == False:
+        r.write(str(level))
+        r.close()
+    else:
+        if level > int(l):
+            r.truncate(0)
+            r.write(str(level))
+            r.close()
+
+        elif level <= int(l):
+            r.close()
+
