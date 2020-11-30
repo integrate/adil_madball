@@ -10,6 +10,7 @@ mode = "MENU"
 
 while True:
     time.sleep(1 / 60)
+
     if mode == "MENU":
         m = menu.menu(screen)
         if m == "GAME":
@@ -22,3 +23,4 @@ while True:
             mode = "MENU"
             game.save_records()
             game.restart()
+

@@ -1,6 +1,14 @@
 import pygame, settings
+def load_records():
+    global lr
+    j = open("RECORDS.txt", "r")
+    ik = j.readline()
+    ik = ik.strip("\x00")
+    lr = f.render("RECORD " + str(ik), True, [0, 0, 255])
+    j.close()
+
+
 pygame.init()
-variable = 0
 
 lifes = 0
 level = 1
@@ -25,11 +33,7 @@ k = pygame.transform.scale(k, (100, 100))
 
 k.set_colorkey([255, 255, 255])
 
-j = open("RECORDS.txt", "r")
-u = j.readline()
-lr = f.render("RECORD" + u, True, [0, 0, 255])
-j.close()
-
+load_records()
 
 
 def game(screen):
@@ -170,7 +174,7 @@ def game(screen):
 
     #rendering
 
-    screen.fill([variable % 255, 255, variable % 180])
+    screen.fill([255, 255, 180])
 
     lives = f.render("LIVES = " + str(lifes), True, [0, 0, 255])
     lewel = f.render("LEVEL = " + str(level), True, [0, 0, 255])
@@ -211,6 +215,7 @@ def restart():
     hits_to_end = 1
     c.x = 600
     c.y = 80
+    load_records()
     return "MENU"
 
 def save_records():
@@ -218,8 +223,10 @@ def save_records():
 
     r = open("RECORDS.txt", "r+")
     l = r.readline()
+    l = l.strip("\x00")
     po = l.isnumeric()
     if po == False:
+        r.truncate(0)
         r.write(str(level))
         r.close()
     else:
@@ -230,4 +237,6 @@ def save_records():
 
         elif level <= int(l):
             r.close()
+
+
 

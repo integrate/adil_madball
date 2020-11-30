@@ -1,4 +1,1 @@
 #bug
-
-incorrect record
-ugly drawing record
