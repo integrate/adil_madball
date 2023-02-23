@@ -10,7 +10,7 @@ def load_records():
 
 pygame.init()
 
-lifes = 0
+lifes = 3
 level = 1
 hits_to_end = 1
 last_record = level
@@ -33,7 +33,7 @@ k = pygame.transform.scale(k, (100, 100))
 
 k.set_colorkey([255, 255, 255])
 
-load_records()
+# load_records()
 
 
 def game(screen):
@@ -189,7 +189,7 @@ def game(screen):
     screen.blit(lives, [900, 30])
     screen.blit(lewel, (900, 10))
     screen.blit(hits, [900, 50])
-    screen.blit(lr, (900, 70))
+    # screen.blit(lr, (900, 70))
 
     screen.blit(k, c)
     pygame.display.flip()
@@ -215,7 +215,7 @@ def restart():
     hits_to_end = 1
     c.x = 600
     c.y = 80
-    load_records()
+    # load_records()
     return "MENU"
 
 def save_records():
